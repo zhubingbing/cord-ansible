@@ -1,0 +1,95 @@
+build_cord_dir: "/work/cord"
+work_dir: "/work/cord"
+build_docker_tag: "candidate"
+
+build_namespace: "xosproject"
+
+
+
+xos_images:
+   xos-base:
+     path: "{{ build_cord_dir }}/orchestration/xos"
+     name: "{{ build_namespace}}/xos-base"
+     dockerfile: "containers/xos/Dockerfile.base"
+     tag: "{{ build_docker_tag }}"
+   xos-libraries:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos"
+     name: "xosproject/xos-libraries"
+     dockerfile: "containers/xos/Dockerfile.libraries"
+     tag: "{{ build_docker_tag }}"
+   xos-corebuilder:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos"
+     name: "xosproject/xos-corebuilder"
+     dockerfile: "containers/xos/Dockerfile.corebuilder"
+     tag: "{{ build_docker_tag }}"
+   xos-client:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos"
+     name: "xosproject/xos-client"
+     dockerfile: "containers/xos/Dockerfile.client"
+     tag: "{{ build_docker_tag }}"
+   xos:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos"
+     name: "xosproject/xos"
+     dockerfile: "containers/xos/Dockerfile.xos"
+     tag: "{{ build_docker_tag }}"
+   xos-synchronizer-base:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos"
+     name: "xosproject/xos"
+     dockerfile: "containers/xos/Dockerfile.xos"
+     tag: "{{ build_docker_tag }}"
+   xos-ws:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos-rest-gw"
+     name: "xosproject/xos-ws"
+     dockerfile: "Dockerfile"
+     tag: "{{ build_docker_tag }}"
+   volt-synchronizer:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/vtr/xos/synchronizer"
+     name: "xosproject/vtr-synchronizer"
+     dockerfile: "Dockerfile.synchronizer"
+     tag: "{{ build_docker_tag }}"
+   vtn-synchronizer:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/vtn-service/xos/synchronizer"
+     name: "xosproject/vtn-synchronizer"
+     dockerfile: "Dockerfile.synchronizer"
+     tag: "{{ build_docker_tag }}"
+   onos-synchronizer:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/onos-service/xos/synchronizer"
+     name: "xosproject/onos-synchronizer"
+     dockerfile: "Dockerfile.synchronizer"
+     tag: "{{ build_docker_tag }}"
+   openstack-synchronizer:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/openstack/xos/synchronizer"
+     name: "xosproject/openstack-synchronizer"
+     dockerfile: "Dockerfile.synchronizer"
+     tag: "{{ build_docker_tag }}"
+   vrouter-synchronizer:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/vrouter/xos/synchronizer"
+     name: "xosproject/vrouter-synchronizer"
+     dockerfile: "Dockerfile.synchronizer"
+     tag: "{{ build_docker_tag }}"
+   addressmanager-synchronizer:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/addressmanager/xos/synchronizer"
+     name: "xosproject/addressmanager-synchronizer"
+     dockerfile: "Dockerfile.synchronizer"
+     tag: "{{ build_docker_tag }}"
+   vsg-synchronizer:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/vsg/xos/synchronizer"
+     name: "xosproject/vsg-synchronizer"
+     dockerfile: "Dockerfile.synchronizer"
+     tag: "{{ build_docker_tag }}" 
+   vtr-synchronizer:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/vtr/xos/synchronizer"
+     name: "xosproject/vtr-synchronizer"
+     dockerfile: "Dockerfile.synchronizer"
+     tag: "{{ build_docker_tag }}"
+   fabric-synchronizer:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/fabric/xos/synchronizer"
+     name: "xosproject/fabric-synchronizer"
+     dockerfile: "Dockerfile.synchronizer"
+     tag: "{{ build_docker_tag }}"
+   exampleservice-synchronizer:
+     path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/exampleservice/xos/synchronizer"
+     name: "xosproject/exampleservice-synchronizer"
+     dockerfile: "Dockerfile.synchronizer"
+     tag: "{{ build_docker_tag }}"
+   
