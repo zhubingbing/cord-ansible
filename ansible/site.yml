@@ -36,12 +36,3 @@
     - { role: onos,
         tags: onos }
 
-
-- name: Apply role onos
-  gather_facts: false
-  hosts:
-    - localhost
-  serial: '{{ serial|default("0") }}'
-  roles:
-    - { role: images,
-        tags: images }

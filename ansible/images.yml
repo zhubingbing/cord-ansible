@@ -1,0 +1,8 @@
+- name: Apply role images
+  gather_facts: false
+  hosts:
+    - localhost
+  serial: '{{ serial|default("0") }}'
+  roles:
+    - { role: images,
+        tags: images }
