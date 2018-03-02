@@ -1,0 +1,5 @@
+- name: Configure XOS
+  hosts: xos_ui
+  connection: docker
+  roles:
+    - cord-improve

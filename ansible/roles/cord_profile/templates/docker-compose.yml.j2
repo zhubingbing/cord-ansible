@@ -234,6 +234,12 @@ services:
      - {{ network }}
 {% endfor %}
     command: python /opt/xos/manage.py runserver 0.0.0.0:9000
+{% if extra_hosts %}
+    extra_hosts:
+{% for extra_host in extra_hosts %}
+      - {{ extra_host }}
+{% endfor %}
+{% endif %}
     ports:
       - "9000:9000"
     links:
@@ -328,6 +334,12 @@ services:
 {% for network in xos_docker_networks %}
      - {{ network }}
 {% endfor %}
+{% if extra_hosts %}
+    extra_hosts:
+{% for extra_host in extra_hosts %}
+      - {{ extra_host }}
+{% endfor %}
+{% endif %}
     depends_on:
       - registrator
 {% if use_redis %}

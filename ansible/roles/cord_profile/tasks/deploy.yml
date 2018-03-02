@@ -1,8 +1,9 @@
 - name: Include variables
   include_vars: "{{ item }}"
   with_items:
-    - "{{ cord_workdir }}/build/platform-install/profile_manifests/{{ cord_profile }}.yml"
-    - "{{ cord_workdir }}/build/platform-install/profile_manifests/local_vars.yml"
+     - "rcord.yml"
+     - "local_vars.yml"
+
 
 - include: create-configdir.yml
 

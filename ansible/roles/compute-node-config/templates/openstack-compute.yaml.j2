@@ -1,0 +1,46 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+
+imports:
+  - custom_types/deployment.yaml
+  - custom_types/node.yaml
+  - custom_types/site.yaml
+  - custom_types/sitedeployment.yaml
+
+description: Adds OpenStack compute nodes
+
+topology_template:
+  node_templates:
+
+# Site/Deployment, fully defined in deployment.yaml
+    mysite:
+      type: tosca.nodes.Site
+      properties:
+        no-delete: true
+        no-create: true
+        no-update: true
+ 
+    MyDeployment:
+      type: tosca.nodes.Deployment
+      properties:
+        no-delete: true
+        no-create: true
+        no-update: true
+    cord-openstack-1:
+      type: tosca.nodes.Node
+      requirements:
+        - site:
+            node: mysite
+            relationship: tosca.relationships.MemberOfSite
+        - deployment:
+            node: MyDeployment
+            relationship: tosca.relationships.MemberOfDeployment
+ 
+    cord-openstack-2:
+      type: tosca.nodes.Node
+      requirements:
+        - site:
+            node: mysite
+            relationship: tosca.relationships.MemberOfSite
+        - deployment:
+            node: MyDeployment
+            relationship: tosca.relationships.MemberOfDeployment

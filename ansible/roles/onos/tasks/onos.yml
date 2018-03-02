@@ -17,13 +17,17 @@
     name: "{{ service.container_name }}"
     image: "{{ service.image }}"
     state: "started"
-    network_mode: bridge
+#    networks:
+#      - name: "xos"
+#        aliases:
+#          - onos-cord.cord.lab
     volumes: "{{ service.volumes }}"
     ports:
        - "6654:6653"
        - "8102:8101"
        - "8182:8181"
        - "9877:9876"
+       - "6641:6640"
   when:
     - inventory_hostname in groups[service.group]
     - service.enabled | bool
@@ -38,7 +42,10 @@
     image: "{{ service.image }}"
     state: "started"
     volumes: "{{ service.volumes }}"
-    network_mode: bridge
+#    networks:
+#      - name: "xos"
+#        aliases:
+#          - onos_fabric
     #env:
     #  ONOS_APPS: "{{ onos_fabric_apps }}"
     ports:

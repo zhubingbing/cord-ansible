@@ -1,11 +1,11 @@
-- name: Apply role genconfig
-  gather_facts: false
-  hosts:
-    - localhost
-  serial: '{{ serial|default("0") }}'
-  roles:
-    - { role: genconfig,
-        tags: genconfig }
+#- name: Apply role genconfig
+#  gather_facts: false
+#  hosts:
+#    - localhost
+#  serial: '{{ serial|default("0") }}'
+#  roles:
+#    - { role: genconfig,
+#        tags: genconfig }
 
 
 - name: Apply role cord_profile
