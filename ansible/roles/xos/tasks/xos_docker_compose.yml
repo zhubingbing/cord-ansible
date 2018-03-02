@@ -21,7 +21,9 @@
     project_name: "rcord"
     project_src: "{{ config_cord_profile_dir }}"
     pull: "{{ always_pull_xos_images | default('false') }}"
+#    state: absent
   register: output
+  
 
 - name: Print vars
   debug:

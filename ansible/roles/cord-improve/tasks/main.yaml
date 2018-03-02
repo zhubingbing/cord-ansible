@@ -1,17 +1,34 @@
 ---
+- name: Copying over config.json files for services
+  template:
+    src: "{{ item }}.j2"
+    dest: "/opt/cord_profile/{{ item }}"
+  with_items:
+    - "openstack-compute.yaml"
+    - "vtn-network-cfg.json"
+    - "vtn-service.yaml"
+    - "vtn-compute.yaml"
 
 - name: Bootstrap XOS database - create site, deployment, admin user
-  command: "python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
+  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
   with_items:
     - "fixtures.yaml"
     - "deployment.yaml"
 
-#- name: Configure XOS with OpenStack config
-#  command: "python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
-#  with_items:
-#    - openstack.yaml
-#  tags:
-#    - skip_ansible_lint # TOSCA loading should be idempotent
+
+
+- name: Configure XOS with OpenStack config
+  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
+  with_items:
+    - "openstack.yaml"
+    - "openstack-compute.yaml"
+
+
+- name: Configure vtn with xos config
+  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
+  with_items:
+    - "vtn-service.yaml"
+    - "vtn-compute.yaml"
 #
 #- name: Configure XOS with profile specific TOSCA
 #  command: "python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"

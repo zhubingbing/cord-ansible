@@ -1,0 +1,8 @@
+---
+
+# used in deployment.yaml.j2
+credentials_dir: "/opt/key/credentials"
+xos_admin_user: "xosadmin@opencord.org"
+xos_admin_pass: "{{ lookup('password', credentials_dir ~ '/xosadmin@opencord.org chars=ascii_letters,digits') }}"
+xos_admin_first: XOS
+xos_admin_last: Admin

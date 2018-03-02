@@ -1,0 +1,118 @@
+tosca_definitions_version: tosca_simple_yaml_1_0
+ 
+imports:
+   - custom_types/xos.yaml
+ 
+description: Configures VTN networking for OpenStack compute nodes
+ 
+topology_template:
+  node_templates:
+ 
+# VTN ONOS app, fully defined in vtn-service.yaml
+    service#ONOS_CORD:
+      type: tosca.nodes.ONOSService
+      properties:
+        no-delete: true
+        no-create: true
+        no-update: true
+ 
+# VTN networking for OpenStack Compute Nodes
+ 
+# Compute node, fully defined in compute-nodes.yaml
+    cord-openstack-1:
+      type: tosca.nodes.Node
+      properties:
+        no-delete: true
+        no-create: true
+        no-update: true
+ 
+    cord-openstack-1_bridgeId_tag:
+      type: tosca.nodes.Tag
+      properties:
+        name: bridgeId
+        value: of:0000000000000001
+      requirements:
+        - target:
+            node: cord-openstack-1 
+            relationship: tosca.relationships.TagsObject
+        - service:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.MemberOfService
+ 
+# VTN dataPlaneIntf field for node compute-01
+    cord-openstack-1_dataPlaneIntf_tag:
+      type: tosca.nodes.Tag
+      properties:
+        name: dataPlaneIntf
+        value: ens4
+      requirements:
+        - target:
+            node: cord-openstack-1
+            relationship: tosca.relationships.TagsObject
+        - service:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.MemberOfService
+ 
+# VTN dataPlaneIp field for node compute-01
+    cord-openstack-1_dataPlaneIp_tag: 
+      type: tosca.nodes.Tag
+      properties:
+        name: dataPlaneIp
+        value: 10.1.1.6/24
+      requirements:
+        - target:
+            node: cord-openstack-1
+            relationship: tosca.relationships.TagsObject
+        - service:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.MemberOfService
+ 
+# Compute node, fully defined in compute-nodes.yaml
+    cord-openstack-2:
+      type: tosca.nodes.Node
+      properties:
+        no-delete: true
+        no-create: true
+        no-update: true
+ 
+# VTN bridgeId field for node compute-02
+    cord-openstack-2_bridgeId_tag:
+      type: tosca.nodes.Tag
+      properties:
+        name: bridgeId
+        value: of:0000000000000002
+      requirements:
+        - target:
+            node: cord-openstack-2 
+            relationship: tosca.relationships.TagsObject
+        - service:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.MemberOfService
+ 
+# VTN dataPlaneIntf field for node compute-02
+    cord-openstack-2_dataPlaneIntf_tag: 
+      type: tosca.nodes.Tag
+      properties:
+        name: dataPlaneIntf
+        value: ens4
+      requirements:
+        - target:
+            node: cord-openstack-2
+            relationship: tosca.relationships.TagsObject
+        - service:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.MemberOfService
+ 
+# VTN dataPlaneIp field for node compute-02
+    cord-openstack-2_dataPlaneIp_tag:
+      type: tosca.nodes.Tag
+      properties:
+        name: dataPlaneIp
+        value: 10.1.1.9/24
+      requirements:
+        - target:
+            node: cord-openstack-2
+            relationship: tosca.relationships.TagsObject
+        - service:
+            node: service#ONOS_CORD
+            relationship: tosca.relationships.MemberOfService

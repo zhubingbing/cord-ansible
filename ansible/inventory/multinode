@@ -1,6 +1,6 @@
 [control]
 # These hostname must be resolvable from your deployment host
-localhost   ansible_ssh_user=root 
+node2   ansible_ssh_user=root 
 
 [compute]
 cord-openstack-1

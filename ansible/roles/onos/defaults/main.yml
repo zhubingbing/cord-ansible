@@ -32,7 +32,6 @@ maven_services:
     image: "{{ maven_image_full }}"
     volumes:
       - "/etc/localtime:/etc/localtime:ro"
-
 onos_services:
   onos-cord:
     container_name: "onos_cord"
@@ -40,6 +39,7 @@ onos_services:
     enabled: true
     image: "{{ onos_image_full }}"
     volumes:
+      - "/opt/cord_profile:/opt/cord_profile:ro"
       - "/etc/localtime:/etc/localtime:ro"
   onos-fabric:
     container_name: "onos_fabric"
@@ -47,4 +47,5 @@ onos_services:
     enabled: true
     image: "{{ onos_image_full }}"
     volumes:
+      - "/opt/cord_profile:/opt/cord_profile:ro"
       - "/etc/localtime:/etc/localtime:ro"
