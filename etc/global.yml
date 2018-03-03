@@ -32,3 +32,8 @@ os_identity_api_version: "3"
 extra_hosts:
    - "cord-openstack-1:10.10.10.18"
    - "cord-openstack-2:10.10.10.7"
+
+compute_node_name:
+  - "cord-openstack-1"
+  - "cord-openstack-2"
+

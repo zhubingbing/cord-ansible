@@ -25,7 +25,9 @@ topology_template:
         no-update: true
  
 # OpenStack compute nodes
-    cord-openstack-1:
+{% for node in compute_node_name %}
+
+    {{ node }}:
       type: tosca.nodes.Node
       requirements:
         - site:
@@ -34,13 +36,4 @@ topology_template:
         - deployment:
             node: MyDeployment
             relationship: tosca.relationships.MemberOfDeployment
- 
-    cord-openstack-2:
-      type: tosca.nodes.Node
-      requirements:
-        - site:
-            node: mysite
-            relationship: tosca.relationships.MemberOfSite
-        - deployment:
-            node: MyDeployment
-            relationship: tosca.relationships.MemberOfDeployment
+{% endfor %} 
