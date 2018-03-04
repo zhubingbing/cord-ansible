@@ -1,3 +1,9 @@
+- name: Ensuring config directories exist
+  file:
+    path: "/opt/cord_profile"
+    state: "directory"
+    recurse: yes
+
 - name: Create OpenStack compute node TOSCA
   template:
     src: "{{ item }}.j2"

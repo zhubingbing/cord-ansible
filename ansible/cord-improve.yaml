@@ -1,3 +1,8 @@
+- name:  Enable Compute Node
+  hosts: compute
+  roles:
+    - compute-node-config
+
 - name: Configure XOS
   hosts: xos
   roles:

@@ -7,3 +7,5 @@ xos_admin_pass: "{{ lookup('password', credentials_dir ~ '/xosadmin@opencord.org
 xos_admin_first: XOS
 xos_admin_last: Admin
 onos_ip: 10.10.10.7
+local_management_ip: 10.1.1.7/24
+xos_ip: 10.10.10.7

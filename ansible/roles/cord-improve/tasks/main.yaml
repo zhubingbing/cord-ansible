@@ -4,10 +4,10 @@
     src: "{{ item }}.j2"
     dest: "/opt/cord_profile/{{ item }}"
   with_items:
-    - "openstack-compute.yaml"
+#    - "openstack-compute.yaml"
     - "vtn-network-cfg.json"
     - "vtn-service.yaml"
-    - "vtn-compute.yaml"
+#    - "vtn-compute.yaml"
     - "openstack-network.yaml"
     - "fixtures.yaml"
     - "deployment.yaml"
@@ -32,5 +32,5 @@
   command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
   with_items:
     - "vtn-service.yaml"
-    - "vtn-compute.yaml"
+    - "openstack-compute-vtn.yaml"
     - "openstack-network.yaml"
