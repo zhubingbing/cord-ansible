@@ -39,6 +39,10 @@ computenode_fabric_interfaces:
   - fabric
   - br-int
 
+use_management_hosts: 
+
+compute_external_interfaces:
+  - ens3
 # used in openstack-compute-vtn.yaml.j2, referencing network in management-net.yaml.j2
 use_vtn_net_management_host: False
 vtn_net_management_host_interface: vethmgmt1

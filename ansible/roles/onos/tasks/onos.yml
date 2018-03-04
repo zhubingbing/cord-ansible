@@ -17,6 +17,7 @@
     name: "{{ service.container_name }}"
     image: "{{ service.image }}"
     state: "started"
+    restart_policy: "always"
 #    networks:
 #      - name: "xos"
 #        aliases:
@@ -41,6 +42,7 @@
     name: "{{ service.container_name }}"
     image: "{{ service.image }}"
     state: "started"
+    restart_policy: "always"
     volumes: "{{ service.volumes }}"
 #    networks:
 #      - name: "xos"

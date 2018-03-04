@@ -1,11 +1,10 @@
 [control]
 # These hostname must be resolvable from your deployment host
-node2   ansible_ssh_user=root 
+172.18.24.135   ansible_ssh_user=root 
 
 [compute]
-cord-openstack-1
-cord-openstack-2
-
+172.18.24.135
+172.18.24.131
 
 [genconfig:children]
 control

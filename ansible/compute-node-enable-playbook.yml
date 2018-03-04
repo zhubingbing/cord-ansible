@@ -1,4 +1,4 @@
 - name:  Enable Compute Node
-  hosts: xos
+  hosts: compute
   roles:
     - compute-node-config
