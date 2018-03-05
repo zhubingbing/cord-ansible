@@ -4,7 +4,6 @@
      - "rcord.yml"
      - "local_vars.yml"
 
-
 - include: create-configdir.yml
 
 - include: pki-roo-ca.yml

@@ -12,7 +12,6 @@
   gather_facts: false
   hosts:
     - localhost
-  serial: '{{ serial|default("0") }}'
   roles:
     - { role: cord_profile,
         tags: cord_profile }
@@ -21,7 +20,6 @@
   gather_facts: false
   hosts:
     - xos
-  serial: '{{ serial|default("0") }}'
   roles:
     - { role: xos,
         tags: xos }

@@ -13,13 +13,13 @@ deploy_registry: False
 
 # Variables required by MAAS
 fabric_ip: '10.6.1.1/24'
-xos_ip: "10.10.10.10"
-onos_ip: "10.10.10.10"
+xos_ip: "10.10.1.13"
+onos_ip: "10.10.1.13"
 local_management_ip: '10.1.0.1/24'
 management_network: '10.1.0.0/24'
 
 compute_external_interfaces:
-  - ens4
+  - ens7
 
 # openstack information
 
@@ -28,15 +28,15 @@ os_user_domain_name: "Default"
 os_user_name: "admin"
 os_password: "P91MoSOBi1ayhp7vhvnVeMiHGGmWhZxxgSuyfNwf"
 os_tenant_name: "admin"
-os_auth_url: "http://192.19.1.100:35357/v3"
+os_auth_url: "http://10.10.1.4:35357/v3"
 os_region_name: "RegionOne"
 os_identity_api_version: "3"
 
 extra_hosts:
-   - "cord-demo-node1:192.19.1.4"
-   - "cord-demo-node2:192.19.1.9"
+   - "cord-demo-1:10.10.1.4"
+   - "cord-demo-2:10.10.1.13"
 
 compute_node_name:
-  - "cord-demo-node1"
-  - "cord-demo-node2"
+  - "cord-demo-1"
+  - "cord-demo-2"
 
