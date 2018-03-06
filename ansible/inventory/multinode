@@ -1,10 +1,10 @@
 [control]
 # These hostname must be resolvable from your deployment host
-172.18.24.155   ansible_ssh_user=root 
+172.18.24.131   ansible_ssh_user=root 
 
 [compute]
-172.18.24.139
-172.18.24.155
+172.18.24.131
+172.18.24.135
 
 [genconfig:children]
 control

@@ -1,5 +1,0 @@
-- name: Apply profile config
-  hosts: xos_ui
-  connection: docker
-  roles:
-    - xos-config

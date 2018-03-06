@@ -25,6 +25,15 @@
     group: root
     mode: 0644
 
+- name: Apache configuration for CORD sites
+  copy:
+    src: files/ports.conf
+    dest: /etc/apache2/ports.conf
+    owner: root
+    group: root
+    mode: 0644
+
+
 - name: Enable CORD Apache Configuration
   command: a2enconf cord-http
   register: en_cord_http

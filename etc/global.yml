@@ -1,4 +1,4 @@
-#cord_workdir: "/sss/cord"
+#work_dir: "/work/cord"
 cord_profile: "rcord"
 config_cord_profile_dir: "/opt/cord_profile"
 pull_docker_registry: "zhubingbing/"
@@ -39,4 +39,3 @@ extra_hosts:
 compute_node_name:
   - "cord-demo-1"
   - "cord-demo-2"
-

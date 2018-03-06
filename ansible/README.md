@@ -1,16 +1,14 @@
 ```
-kolla-ansible deploy -i all-in-one -p opencord.yml
-ansible-playbook -i inventory/all-in-one -e action=deploy genconfig.yml
+## Deploy onos and xos
 
-ansible-playbook -i inventory/all-in-one -e @/work/cord/build/genconfig/config.yml -e @~/work/opencord/etc/global.yml -e action=deploy test.yml
+ansible-playbook -i inventory/multinode -e @../etc/global.yml -e action=deploy site.yml
 
+## Generate openstack-compute-vtn configuration file
 
-## deploy cord
+ansible-playbook -i inventory/multinode -e @../etc/global.yml compute-node-enable-playbook.yml
 
-ansible-playbook -i inventory/all-in-one -e @../etc/global.yml -e action=deploy site.yml
+## Onboard openstack vtn onos in xos
 
-## post-config xos
-
-ansible-playbook -i inventory/all-in-one -e @../etc/global.yml -e action=deploy xos-config.yaml
+ansible-playbook -i inventory/multinode -e @../etc/global.yml cord-improve.yaml
 
 ```
