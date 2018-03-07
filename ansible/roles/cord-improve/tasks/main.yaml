@@ -1,4 +1,13 @@
 ---
+- name: Copy (sync) the cord directory to head node
+  become: yes
+  synchronize:
+    src: "/opt/cord_profile/{{ item }}"
+    dest: "/opt/cord_profile/{{ item }}"
+  with_items:
+    - "openstack-compute.yaml"
+    - "openstack-compute-vtn.yaml"
+
 - name: Copying over config.json files for services
   template:
     src: "{{ item }}.j2"
@@ -12,6 +21,7 @@
     - "fixtures.yaml"
     - "deployment.yaml"
     - "openstack.yaml"
+    - "slice-test.yaml"
 #    - "node_key"
 
 - name: Bootstrap XOS database - create site, deployment, admin user
@@ -19,7 +29,7 @@
   with_items:
     - "fixtures.yaml"
     - "deployment.yaml"
-
+    - "slice-test.yaml"
 
 - name: Configure XOS with OpenStack config
   command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
@@ -33,4 +43,4 @@
   with_items:
     - "vtn-service.yaml"
     - "openstack-compute-vtn.yaml"
-    - "openstack-network.yaml"
+#    - "openstack-network.yaml"
