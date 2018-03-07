@@ -23,12 +23,12 @@
     - key_import
     - images
 
-- name: Copy ssh private key to node_key file
-  copy:
-    src: "{{ ssh_pki_dir }}/client_certs/{{ pod_sshkey_name }}_sshkey"
-    dest: "{{ config_cord_profile_dir }}/node_key"
-    mode: 0600
-    remote_src: True
+- name: Copying over node_key files for services
+  template:
+    src: "{{ item }}.j2"
+    dest: "/opt/cord_profile/{{ item }}"
+  with_items:
+    - "node_key"
 
 - name: Copy ssh public key to node_key.pub file
   copy:
