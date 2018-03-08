@@ -21,8 +21,17 @@
 - name: Build an image and push it to a private repo
   docker_image:
     path: "{{ item.value.path }}"
-    name: "{{ item.value.namespaces }}/{{ item.value.name }}"
+    name: "{{ item.value.name }}"
     tag: "{{ build_docker_tag }}"
     dockerfile: "{{ item.value.dockerfile }}"
     force: True
+  with_dict: "{{ xos_images }}"
+
+
+- name: Tag and push to docker registry
+  docker_image:
+    name: "{{ item.value.name }}"
+    repository: "{{ docker_registry }}"
+    tag: "{{ push_docker_tag }}"
+    push: yes
   with_dict: "{{ xos_images }}"

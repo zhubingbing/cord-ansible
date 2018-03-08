@@ -4,7 +4,11 @@ build_docker_tag: "candidate"
 
 build_namespace: "xosproject"
 
+push_namespace: "99cloud"
 
+push_docker_tag: "cord-4.1"
+
+docker_registry: "172.18.22.212:6000"
 
 xos_images:
    xos-base:
