@@ -48,7 +48,7 @@ topology_template:
               relationship: tosca.relationships.UsedByService
       properties:
           install_dependencies: http://{{ onos_ip }}:8080/repository/org/opencord/cord-config/1.3.0/cord-config-1.3.0.oar, http://{{ onos_ip }}:8080/repository/org/opencord/vtn/1.3.0/vtn-1.3.0.oar
-          dependencies: org.onosproject.drivers, org.onosproject.drivers.ovsdb, org.onosproject.openflow-base, org.onosproject.ovsdb-base
+          dependencies: org.onosproject.drivers, org.onosproject.drivers.ovsdb, org.onosproject.openflow-base, org.onosproject.ovsdb-base, org.onosproject.dhcp
           #rest_onos/v1/network/configuration/: { get_artifact: [ SELF, vtn_network_cfg_json, LOCAL_FILE ] }
           autogenerate: vtn-network-cfg
       #artifacts:
