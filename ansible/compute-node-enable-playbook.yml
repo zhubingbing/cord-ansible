@@ -1,4 +1,12 @@
+- name: Gather facts for all hosts
+  hosts: all
+  serial: '{{ serial|default("0") }}'
+  gather_facts: false
+  tasks:
+    - setup:
+  tags: always
+
 - name:  Enable Compute Node
-  hosts: compute
+  hosts: localhost
   roles:
     - compute-node-config

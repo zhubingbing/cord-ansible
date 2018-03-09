@@ -14,13 +14,3 @@
     - openstack-compute.yaml
     - openstack-compute-vtn.yaml
 
-
-- name: Copy (sync) the cord directory to head node
-  become: yes
-  synchronize:
-    src: "/opt/cord_profile/{{ item }}"
-    dest: "/opt/cord_profile/{{ item }}"
-    mode: pull
-  with_items:
-    - "openstack-compute.yaml"
-    - "openstack-compute-vtn.yaml"

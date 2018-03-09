@@ -20,7 +20,7 @@ local_management_ip: '10.1.0.1/24'
 management_network: '10.1.0.0/24'
 
 compute_external_interfaces:
-  - ens7
+  - ens3
 
 # openstack information
 
