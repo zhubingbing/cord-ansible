@@ -1,0 +1,88 @@
+site_name: mysite
+site_humanname: MySite
+#site_suffix: "{{ site_name }}.opencord.org"
+site_suffix: "cord.lab"
+deployment_type: MyDeployment
+
+use_fabric: True
+use_maas: True
+
+
+xos_tosca_config_templates:
+  - vtn-service.yaml
+  - fabric-service.yaml
+  - management-net.yaml
+  - shared-net.yaml
+  - wan-net.yaml
+  - vsg-net.yaml
+  - xos-gui-extensions.yml
+
+xos_new_tosca_config_templates:
+  - s11-net.yaml
+  - s1u-net.yaml
+  - nbi-net.yaml
+  - sbi-net.yaml
+  - spgw-net.yaml
+  - sgi-net.yaml
+  - flat-net.yaml
+  - mcord-ng40-services.yml
+  - service-graph-constraints.yaml
+
+
+xos_other_templates:
+  - fabric-network-cfg.json
+
+# GUI Config [new GUI]
+gui_project_name: "M-CORD"
+gui_background: "cord-bg.jpg" # TODO find mcord image
+
+enabled_gui_extensions: []
+
+xos_services:
+  - name: vtn
+    path: orchestration/xos_services/vtn-service
+    keypair: vsg_rsa
+  - name: openstack
+    path: orchestration/xos_services/openstack
+  - name: onos
+    path: orchestration/xos_services/onos-service
+    keypair: onos_rsa
+  - name: addressmanager
+    path: orchestration/xos_services/addressmanager
+  - name: fabric
+    path: orchestration/xos_services/fabric
+  - name: venb
+    path: orchestration/xos_services/venb
+    keypair: mcord_rsa
+  - name: vspgwc
+    path: orchestration/xos_services/vspgwc
+    keypair: mcord_rsa
+  - name: vspgwu
+    path: orchestration/xos_services/vspgwu
+    keypair: mcord_rsa
+  - name: vepc
+    path: orchestration/xos_services/epc-service
+    keypair: mcord_rsa
+
+# service graph gui constraints
+xos_gui_service_graph_constraints: '["mcord", "venb", ["vspgwc", "vspgwu"]]'
+
+profile_library: "mcord"
+
+# VTN network configuration
+management_network_cidr: 172.27.0.0/24
+management_network_ip: 172.27.0.1/24
+data_plane_ip: 10.168.0.253/24
+
+xos_images:
+  - name: "image-venb"
+    url: "https://github.com/opencord/venb/releases/download/vms/ng40-vmcord-1-4GB.img.20171201"
+    checksum: "sha256:3d6d385247560c90db90b2591578c200eafaa62c232a964ab664420e8b2b33ac"
+
+  - name: "image-spgwc"
+    url: "http://www.vicci.org/cord/ngic-cp1-cmpress.qcow2.20171121"
+    checksum: "sha256:eca43de006d193625778597cc9b3f171752c31e0ce6dbed363954c87c33935a3"
+
+  - name: "image-spgwu"
+    url: "http://www.vicci.org/cord/ngic-dp1-cmpress.qcow2.20171121"
+    checksum: "sha256:2d431dc24b8de5d531ddf9a82c20f692d9ac8c9d4dd0295c535acc06c6635bc5"

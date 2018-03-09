@@ -1,3 +1,8 @@
+- name: Include variables
+  include_vars: "{{ item }}"
+  with_items:
+     - "mcord-ng40.yml"
+
 - name: pull images
   docker_image:
     name: "{{ item }}"
@@ -33,3 +38,49 @@
     repository: "{{ docker_registry }}/{{ push_namespace }}/{{ item.prject_name}}:{{ push_docker_tag }}"
     push: yes
   with_items: "{{ xos_images }}"
+
+- name: Intialize recipe list
+  set_fact:
+    recipes: ['/opt/cord/orchestration/xos/xos/core/core-onboard.yaml']
+
+- name: Generate list of recipes
+  set_fact:
+    recipes: "{{ recipes }} + [ '/opt/cord/{{ item.path }}/xos/{{ item.name }}-{{ item.operation | default('onboard') }}.yaml']"
+  with_items: "{{ xos_services }}"
+
+- name: Add in the profile library
+  set_fact:
+    recipes: "{{ recipes }} + [ '/opt/cord/orchestration/profiles/{{ profile_library }}/xos/{{ profile_library }}-onboard.yaml']"
+  when:
+    profile_library != ""
+
+- name: Join the list of recipes
+  set_fact:
+    recipes_string: "{{ recipes | join(' ') }}"
+
+- debug:
+    msg: "{{ recipes }}"
+
+- name: Create the BUILD directory
+  file:
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos/containers/xos/BUILD"
+    state: directory
+    mode: 0755
+
+- name: Run the corebuilder tool
+  shell: >
+    docker run
+    --rm
+    -v {{ work_dir }}:/opt/cord
+    -v {{ build_cord_dir ~ "/orchestration/xos/containers/xos/BUILD" | realpath }}:/opt/xos_corebuilder/BUILD
+    xosproject/xos-corebuilder:{{ build_docker_tag }}
+    {{ recipes_string }}
+
+- name: Build UI image
+  docker_image:
+    name: "xosproject/xos-ui"
+    path: "{{ work_dir }}/orchestration/xos"
+    tag: "{{ build_docker_tag }}"
+    dockerfile: "containers/xos/Dockerfile.UI"
+    pull: False
+    force: True
