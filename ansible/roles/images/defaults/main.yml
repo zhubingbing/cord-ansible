@@ -113,6 +113,30 @@ xos_images:
     dockerfile: "Dockerfile.synchronizer"
     tag: "{{ build_docker_tag }}"
 
+  - project_name: "epc-service-synchronizer"
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/epc-service/xos/synchronizer"
+    name: "xosproject/epc-service-synchronizer"
+    dockerfile: "Dockerfile.synchronizer"
+    tag: "{{ build_docker_tag }}"
+  
+  - project_name: "venb-synchronizer"
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/venb/xos/synchronizer"
+    name: "xosproject/venb-synchronizer"
+    dockerfile: "Dockerfile.synchronizer"
+    tag: "{{ build_docker_tag }}"
+
+  - project_name: "vspgwc-synchronizer"
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/vspgwc/xos/synchronizer"
+    name: "xosproject/vspgwc-synchronizer"
+    dockerfile: "Dockerfile.synchronizer"
+    tag: "{{ build_docker_tag }}"
+  
+  - project_name: "vspgwu-synchronize"
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/vspgwc/vspgwu/synchronizer"
+    name: "xosproject/vspgwu-synchronize"
+    dockerfile: "Dockerfile.synchronizer"
+    tag: "{{ build_docker_tag }}"
+  
   - project_name: "xos-gui-builder"
     path: "{{ build_cord_dir | realpath }}/orchestration/xos-gui"
     name: "xosproject/xos-gui-builder"
@@ -123,4 +147,8 @@ xos_images:
     path: "{{ build_cord_dir | realpath }}/orchestration/xos-gui"
     name: "xosproject/xos-gui"
     dockerfile: "Dockerfile"
-    tag: "{{ build_docker_tag }} 
+    tag: "{{ build_docker_tag }}"
+
+xos_ui_imgaes:
+   - project_name: "xos-ui"
+    name: "xosproject/xos-ui"

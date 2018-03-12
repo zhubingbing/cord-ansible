@@ -39,7 +39,7 @@
 - name: Tag and push to docker registry
   docker_image:
     name: "{{ item.name }}:{{ build_docker_tag }}"
-    repository: "{{ docker_registry }}/{{ push_namespace }}/{{ item.prject_name}}:{{ push_docker_tag }}"
+    repository: "{{ docker_registry }}/{{ push_namespace }}/{{ item.project_name}}:{{ push_docker_tag }}"
     push: yes
   with_items: "{{ xos_images }}"
 
@@ -89,3 +89,9 @@
     pull: False
     force: True
 
+- name: Tag and push to docker registry
+  docker_image:
+    name: "{{ item.name }}:{{ build_docker_tag }}"
+    repository: "{{ docker_registry }}/{{ push_namespace }}/{{ item.project_name}}:{{ push_docker_tag }}"
+    push: yes
+  with_items: "{{ xos_ui_images }}"
