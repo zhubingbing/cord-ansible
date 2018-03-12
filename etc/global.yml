@@ -1,6 +1,6 @@
 build_cord_dir: "/opt/cord"
 work_dir: "/opt/cord"
-cord_profile: "rcord"
+cord_profile: "mcord"
 config_cord_profile_dir: "/opt/cord_profile"
 pull_docker_registry: "zhubingbing/"
 namespaces: ""
