@@ -74,7 +74,7 @@ management_network_cidr: 172.27.0.0/24
 management_network_ip: 172.27.0.1/24
 data_plane_ip: 10.168.0.253/24
 
-xos_images:
+openstack_images:
   - name: "image-venb"
     url: "https://github.com/opencord/venb/releases/download/vms/ng40-vmcord-1-4GB.img.20171201"
     checksum: "sha256:3d6d385247560c90db90b2591578c200eafaa62c232a964ab664420e8b2b33ac"
