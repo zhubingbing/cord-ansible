@@ -23,7 +23,7 @@ xos_images:
     dockerfile: "containers/xos/Dockerfile.libraries"
     tag: "{{ build_docker_tag }}" 
   
- - project_name: "xos-corebuilder"
+  - project_name: "xos-corebuilder"
     path: "{{ build_cord_dir | realpath }}/orchestration/xos"
     name: "xosproject/xos-corebuilder"
     dockerfile: "containers/xos/Dockerfile.corebuilder"
