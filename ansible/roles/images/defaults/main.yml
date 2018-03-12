@@ -151,4 +151,4 @@ xos_images:
 
 xos_ui_imgaes:
    - project_name: "xos-ui"
-    name: "xosproject/xos-ui"
+     name: "xosproject/xos-ui"
