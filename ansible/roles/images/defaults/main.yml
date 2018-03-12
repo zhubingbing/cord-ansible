@@ -132,7 +132,7 @@ xos_images:
     tag: "{{ build_docker_tag }}"
   
   - project_name: "vspgwu-synchronize"
-    path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/vspgwc/vspgwu/synchronizer"
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/vspgwu/xos/synchronizer"
     name: "xosproject/vspgwu-synchronize"
     dockerfile: "Dockerfile.synchronizer"
     tag: "{{ build_docker_tag }}"
