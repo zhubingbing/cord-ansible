@@ -13,13 +13,10 @@
     - "redis:3.2"
     - "node:7.9.0"
     - "sebp/elk:564"
-
-- name: Tag to
-  docker_image:
-    name: "{{ item }}"
-    tag: "{{ build_docker_tag }}"
-  with-items:
-    - "nginx:1.13"
+  
+- name: Tag images
+  become: yes
+  shell: docker tag nginx:1.13 nginx:candidate
 
 - name: sync chameleon to xos
   become: yes
@@ -36,6 +33,7 @@
     tag: "{{ build_docker_tag }}"
     dockerfile: "{{ item.dockerfile }}"
     force: True
+    pull: no
   with_items: "{{ xos_images }}"
 
 - name: Tag and push to docker registry
@@ -90,6 +88,4 @@
     dockerfile: "containers/xos/Dockerfile.UI"
     pull: False
     force: True
-
-
 

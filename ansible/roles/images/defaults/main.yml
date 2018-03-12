@@ -43,8 +43,8 @@ xos_images:
    
   - project_name: "xos-synchronizer-base"
     path: "{{ build_cord_dir | realpath }}/orchestration/xos"
-    name: "xosproject/xos"
-    dockerfile: "containers/xos/Dockerfile.xos"
+    name: "xosproject/xos-synchronizer-base"
+    dockerfile: "containers/xos/Dockerfile.synchronizer-base"
     tag: "{{ build_docker_tag }}"
    
   - project_name: "xos-ws"
@@ -114,13 +114,13 @@ xos_images:
     tag: "{{ build_docker_tag }}"
 
   - project_name: "xos-gui-builder"
-    path: "{{ build_cord_dir | realpath }}/orchestration/xos_gui"
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos-gui"
     name: "xosproject/xos-gui-builder"
     dockerfile: "Dockerfile.xos-gui-builder"
     tag: "{{ build_docker_tag }}"
  
   - project_name: "xos-gui"
-    path: "{{ build_cord_dir | realpath }}/orchestration/xos_gui"
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos-gui"
     name: "xosproject/xos-gui"
     dockerfile: "Dockerfile"
     tag: "{{ build_docker_tag }} 
