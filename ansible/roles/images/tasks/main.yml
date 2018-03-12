@@ -14,6 +14,12 @@
     - "node:7.9.0"
     - "sebp/elk:564"
 
+- name: Tag to
+  docker_image:
+    name: "{{ item }}"
+    tag: "{{ build_docker_tag }}"
+  with-items:
+    - "nginx:1.13"
 
 - name: sync chameleon to xos
   become: yes
@@ -84,3 +90,6 @@
     dockerfile: "containers/xos/Dockerfile.UI"
     pull: False
     force: True
+
+
+

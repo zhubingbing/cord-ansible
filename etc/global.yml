@@ -1,5 +1,5 @@
-#work_dir: "/work/cord"
-#build_cord_dir: "/work/cord"
+build_cord_dir: "/opt/cord"
+work_dir: "/opt/cord"
 cord_profile: "rcord"
 config_cord_profile_dir: "/opt/cord_profile"
 pull_docker_registry: "zhubingbing/"

@@ -112,4 +112,15 @@ xos_images:
     name: "xosproject/exampleservice-synchronizer"
     dockerfile: "Dockerfile.synchronizer"
     tag: "{{ build_docker_tag }}"
-   
+
+  - project_name: "xos-gui-builder"
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos_gui"
+    name: "xosproject/xos-gui-builder"
+    dockerfile: "Dockerfile.xos-gui-builder"
+    tag: "{{ build_docker_tag }}"
+ 
+  - project_name: "xos-gui"
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos_gui"
+    name: "xosproject/xos-gui"
+    dockerfile: "Dockerfile"
+    tag: "{{ build_docker_tag }} 

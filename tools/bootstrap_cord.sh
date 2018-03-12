@@ -5,7 +5,7 @@
 
 set -e -u -o pipefail
 
-CORDDIR="${CORDDIR:-/test/cord}"
+CORDDIR="${CORDDIR:-/opt/cord}"
 
 REPO_BRANCH="${REPO_BRANCH:-master}"
 

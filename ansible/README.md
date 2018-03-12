@@ -11,4 +11,8 @@ ansible-playbook -i inventory/multinode -e @../etc/global.yml compute-node-enabl
 
 ansible-playbook -i inventory/multinode -e @../etc/global.yml cord-improve.yaml
 
+## Build mcord image
+
+ansible-playbook -i inventory/multinode -e @../etc/global.yml images.yml
+
 ```
