@@ -1,7 +1,7 @@
 - name: Include variables
   include_vars: "{{ item }}"
   with_items:
-     - "rcord.yml"
+     - "mcord-ng40.yml"
      - "local_vars.yml"
 
 - include: create-configdir.yml

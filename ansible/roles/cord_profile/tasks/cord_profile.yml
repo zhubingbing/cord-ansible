@@ -117,6 +117,5 @@
     src: "{{ item }}.j2"
     dest: "{{ config_cord_profile_dir }}/{{ item }}"
   with_items:
-    - openstack.yaml
     - admin-openrc.sh
     - clouds.yaml
