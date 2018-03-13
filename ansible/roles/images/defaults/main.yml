@@ -29,6 +29,12 @@ xos_images:
     dockerfile: "containers/xos/Dockerfile.corebuilder"
     tag: "{{ build_docker_tag }}"
 
+  - project_name: "xos-postgres"
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos/containers/postgresql"
+    name: "xosproject/xos-postgres"
+    dockerfile: "Dockerfile"
+    tag: "{{ build_docker_tag }}"
+  
   - project_name: "xos-client"
     path: "{{ build_cord_dir | realpath }}/orchestration/xos"
     name: "xosproject/xos-client"
@@ -39,6 +45,18 @@ xos_images:
     path: "{{ build_cord_dir | realpath }}/orchestration/xos"
     name: "xosproject/xos"
     dockerfile: "containers/xos/Dockerfile.xos"
+    tag: "{{ build_docker_tag }}"
+
+  - project_name: "xos-tosca"
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos-tosca"
+    name: "xosproject/xos-tosca"
+    dockerfile: "Dockerfile"
+    tag: "{{ build_docker_tag }}"
+
+  - project_name: "chameleon"
+    path: "{{ build_cord_dir | realpath }}/orchestration/xos/containers/chameleon"
+    name: "xosproject/chameleon"
+    dockerfile: "Dockerfile.chameleon"
     tag: "{{ build_docker_tag }}"
    
   - project_name: "xos-synchronizer-base"
@@ -115,7 +133,7 @@ xos_images:
 
   - project_name: "epc-service-synchronizer"
     path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/epc-service/xos/synchronizer"
-    name: "xosproject/epc-service-synchronizer"
+    name: "xosproject/vepc-synchronizer"
     dockerfile: "Dockerfile.synchronizer"
     tag: "{{ build_docker_tag }}"
   
@@ -152,3 +170,17 @@ xos_images:
 xos_ui:
    - project_name: "xos-ui"
      name: "xosproject/xos-ui"
+
+pull_image:
+   - project_name: "consul-server"
+     name: "gliderlabs/consul-server:0.6"
+   - project_name: "registrator"
+     name: "gliderlabs/registrator:v7"
+   - project_name: "nginx"
+     name: "nginx:1.13"
+   - project_name: "redis"
+     name: "redis:3.2"
+   - project_name: "node"
+     name: "node:7.9.0"
+   - project_name: "elk"
+     name: "sebp/elk:564"

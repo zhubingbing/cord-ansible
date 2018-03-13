@@ -3,18 +3,15 @@
   with_items:
      - "mcord-ng40.yml"
 
-- name: pull images
+- name: pull common images
   docker_image:
-    name: "{{ item }}"
-  with_items:
-    - "gliderlabs/consul-server:0.6"
-    - "gliderlabs/registrator:v7"
-    - "nginx:1.13"
-    - "redis:3.2"
-    - "node:7.9.0"
-    - "sebp/elk:564"
+    name: "{{ item.name }}"
+    repository: "{{ docker_registry }}/{{ push_namespace }}/{{ item.project_name}}:{{ push_docker_tag }}"
+    push: yes
+  with_items: "{{ pull_image }}"
+
   
-- name: Tag images
+- name: Tag images nginx
   become: yes
   shell: docker tag nginx:1.13 nginx:candidate
 
