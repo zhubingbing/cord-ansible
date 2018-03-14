@@ -131,7 +131,7 @@ xos_images:
     dockerfile: "Dockerfile.synchronizer"
     tag: "{{ build_docker_tag }}"
 
-  - project_name: "epc-service-synchronizer"
+  - project_name: "vepc-synchronizer"
     path: "{{ build_cord_dir | realpath }}/orchestration/xos_services/epc-service/xos/synchronizer"
     name: "xosproject/vepc-synchronizer"
     dockerfile: "Dockerfile.synchronizer"
