@@ -63,7 +63,10 @@ xos_services:
   - name: vepc
     path: orchestration/xos_services/epc-service
     keypair: mcord_rsa
-
+  - name: exampleservice
+    path: orchestration/xos_services/exampleservice
+    keypair: exampleservice_rsa
+  
 # service graph gui constraints
 xos_gui_service_graph_constraints: '["mcord", "venb", ["vspgwc", "vspgwu"]]'
 
