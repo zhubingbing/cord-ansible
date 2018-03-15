@@ -3,8 +3,8 @@
 172.18.24.138   ansible_ssh_user=root 
 
 [compute]
-172.18.24.120
-172.18.24.81
+172.18.24.142
+172.18.24.146
 
 [genconfig:children]
 control
