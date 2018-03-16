@@ -20,7 +20,7 @@
     - "openstack-network.yaml"
     - "fixtures.yaml"
     - "deployment.yaml"
-    - "openstack.yaml"
+#    - "openstack.yaml"
     - "slice-test.yaml"
 #    - "node_key"
 
