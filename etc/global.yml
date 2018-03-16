@@ -14,13 +14,13 @@ xos_admin_pass: "99cloud"
 
 # Variables required by MAAS
 fabric_ip: '10.6.1.1/24'
-xos_ip: "10.90.0.15"
-onos_ip: "10.90.0.15"
+xos_ip: "10.90.0.20"
+onos_ip: "10.90.0.20"
 local_management_ip: '172.27.0.1/24'
 management_network: '172.27.0.0/24'
 
 compute_external_interfaces:
-  - ens7
+  - ens4
 
 # openstack information
 

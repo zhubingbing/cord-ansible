@@ -184,3 +184,5 @@ pull_image:
      name: "node:7.9.0"
    - project_name: "elk"
      name: "sebp/elk:564"
+   - project_name: "onos"
+     name: "onosproject/onos:1.10.12"
