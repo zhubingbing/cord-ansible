@@ -1,0 +1,16 @@
+---
+
+- name: Bootstrap mcord
+  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
+  with_items: "{{ xos_tosca_config_templates }}"
+
+- name: Configure XOS with profile specific TOSCA (new Engine)
+  uri:
+    url: "{{ tosca_url }}"
+    method: POST
+    headers:
+      xos-username: "{{ xos_admin_user }}"
+      xos-password: "{{ xos_admin_pass }}"
+    body: "{{ lookup('file','/opt/cord_profile/' + item ) }}"
+    status_code: 200
+  with_items: "{{ xos_new_tosca_config_templates }}"

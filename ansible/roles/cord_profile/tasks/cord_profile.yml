@@ -93,6 +93,7 @@
     - xos-gui-extensions.yml
     - docker-compose.yml
     - xos-tosca.config.yaml
+    - openstack.yaml
 
 - name: Create profile specific templated TOSCA config files
   template:
@@ -119,3 +120,18 @@
   with_items:
     - admin-openrc.sh
     - clouds.yaml
+
+- name: Delete xos user file
+  file:
+    path: "{{ credentials_dir }}/{{ xos_admin_user }}"
+    state: touch
+
+- name: Pushing secrets key for xos
+  copy:
+    content: "{{ xos_admin_pass }}"
+    dest: "{{ credentials_dir }}/{{ xos_admin_user }}"
+    mode: "0600"
+  
+  
+ 
+
