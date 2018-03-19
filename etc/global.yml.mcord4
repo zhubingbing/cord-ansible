@@ -4,18 +4,18 @@ cord_profile: "mcord"
 config_cord_profile_dir: "/opt/cord_profile"
 pull_docker_registry: "99cloud/"
 namespaces: ""
-push_docker_tag: "cord-5.0"
-docker_registry: "172.18.22.212:6888"
+push_docker_tag: "cord-4.1"
+docker_registry: "172.18.22.212:6646"
 docker_namespace: "99cloud"
-cord_release: "cord-5.0"
+cord_release: "cord-4.1"
 node_config_directory: "/etc/cord"
 deploy_registry: False
 xos_admin_pass: "99cloud"
 
 # Variables required by MAAS
 fabric_ip: '10.6.1.1/24'
-xos_ip: "10.90.0.10"
-onos_ip: "10.90.0.10"
+xos_ip: "10.90.0.15"
+onos_ip: "10.90.0.15"
 local_management_ip: '172.27.0.1/24'
 management_network: '172.27.0.0/24'
 
