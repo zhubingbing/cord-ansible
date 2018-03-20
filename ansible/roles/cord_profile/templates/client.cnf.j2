@@ -1,4 +1,3 @@
-
 {#
 Copyright 2017-present Open Networking Foundation
 
@@ -14,15 +13,13 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 #}
-
-
-# Created by openssl_root.cnf.j2, configured by ansible
+# Created by client.cnf.j2, configured by ansible
 
 [ ca ]
 default_ca  = CA_default
 
 [ CA_default ]
-dir               = {{ pki_dir }}/root_ca
+dir               = {{ pki_dir }}/{{ site_name }}_im_ca
 certs             = $dir/certs
 crl_dir           = $dir/crl
 new_certs_dir     = $dir/newcerts
@@ -30,11 +27,11 @@ database          = $dir/index.txt
 serial            = $dir/serial
 RANDFILE          = $dir/private/.randfile
 
-private_key       = $dir/private/ca_key.pem
-certificate       = $dir/certs/ca_cert.pem
+private_key       = $dir/private/im_key.pem
+certificate       = $dir/certs/im_cert.pem
 
 crlnumber         = $dir/crl/crlnumber
-crl               = $dir/crl/ca_crl.pem
+crl               = $dir/crl/im_crl.pem
 crl_extensions    = crl_ext
 default_crl_days  = 30
 
@@ -43,19 +40,21 @@ default_crl_days  = 30
 unique_subject    = no
 
 default_md        = {{ ca_digest }}
+
 name_opt          = ca_default
 cert_opt          = ca_default
-default_days      = {{ ca_root_days }}
+default_days      = {{ ca_im_days }}
 preserve          = no
 
-# for CA that only signs intermediate CA certs
-policy            = policy_strict
+# for CA that signs client certs
+policy            = policy_loose
 
-[ policy_strict ]
-# Used by root CA to sign intermediate CA's, should match
-countryName             = match
-stateOrProvinceName     = match
-organizationName        = match
+[ policy_loose ]
+# Allow the intermediate CA to sign more types of certs
+countryName             = optional
+stateOrProvinceName     = optional
+localityName            = optional
+organizationName        = optional
 organizationalUnitName  = optional
 commonName              = supplied
 emailAddress            = optional
@@ -65,7 +64,7 @@ default_bits         = {{ ca_size }}
 default_md           = {{ ca_digest }}
 distinguished_name   = req_distinguished_name
 string_mask          = utf8only
-x509_extensions      = v3_ca
+x509_extensions      = client_cert
 
 [ req_distinguished_name ]
 # See <https://en.wikipedia.org/wiki/Certificate_signing_request>.
@@ -82,32 +81,15 @@ countryName_default             = US
 stateOrProvinceName_default     = California
 localityName_default            = Menlo Park
 0.organizationName_default      = ON.Lab
-organizationalUnitName_default  = Test Deployment
+organizationalUnitName_default  = {{ site_humanname }}
 emailAddress_default            = privateca@opencord.org
 
-[ v3_ca ]
-# Extensions for a typical CA (`man x509v3_config`).
+[ client_cert ]
+# Extensions for client certificates (`man x509v3_config`).
 subjectKeyIdentifier = hash
-authorityKeyIdentifier = keyid:always,issuer
-basicConstraints = critical, CA:TRUE
-keyUsage = critical, digitalSignature, cRLSign, keyCertSign
-
-[ v3_intermediate_ca ]
-# Extensions for a typical intermediate CA (`man x509v3_config`).
-subjectKeyIdentifier = hash
-authorityKeyIdentifier = keyid:always,issuer
-basicConstraints = critical, CA:TRUE, pathlen:0
-keyUsage = critical, digitalSignature, cRLSign, keyCertSign
-
-[ crl_ext ]
-# Extension for CRLs (`man x509v3_config`).
-authorityKeyIdentifier=keyid:always
-
-[ ocsp ]
-# Extension for OCSP signing certificates (`man ocsp`).
+authorityKeyIdentifier = keyid,issuer:always
 basicConstraints = CA:FALSE
-subjectKeyIdentifier = hash
-authorityKeyIdentifier = keyid,issuer
-keyUsage = critical, digitalSignature
-extendedKeyUsage = critical, OCSPSigning
+keyUsage = critical, digitalSignature, keyEncipherment, nonRepudiation
+extendedKeyUsage = clientAuth, emailProtection
+subjectAltName = {{ item.altnames | join(', ') }}
 

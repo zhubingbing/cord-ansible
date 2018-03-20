@@ -24,23 +24,37 @@
     - "slice-test.yaml"
 #    - "node_key"
 
-- name: Bootstrap XOS database - create site, deployment, admin user
-  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
+#- name: Bootstrap XOS database - create site, deployment, admin user
+#  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
+#  with_items:
+#    - "fixtures.yaml"
+#    - "deployment.yaml"
+#    - "slice-test.yaml"
+#
+#- name: Configure XOS with OpenStack config
+#  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
+#  with_items:
+#    - "openstack.yaml"
+#    - "openstack-compute.yaml"
+#
+#
+#- name: Configure vtn with xos config
+#  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
+#  with_items:
+#    - "vtn-service.yaml"
+#    - "openstack-compute-vtn.yaml"
+##    - "openstack-network.yaml"
+
+- name: Configure XOS with profile specific TOSCA (new Engine)
+  uri:
+    url: "{{ tosca_url }}"
+    method: POST
+    headers:
+      xos-username: "{{ xos_admin_user }}"
+      xos-password: "{{ xos_admin_pass }}"
+    body: "{{ lookup('file','/opt/cord_profile/' + item ) }}"
+    status_code: 200
   with_items:
     - "fixtures.yaml"
     - "deployment.yaml"
     - "slice-test.yaml"
-
-- name: Configure XOS with OpenStack config
-  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
-  with_items:
-    - "openstack.yaml"
-    - "openstack-compute.yaml"
-
-
-- name: Configure vtn with xos config
-  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
-  with_items:
-    - "vtn-service.yaml"
-    - "openstack-compute-vtn.yaml"
-#    - "openstack-network.yaml"

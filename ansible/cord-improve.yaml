@@ -1,4 +1,4 @@
 - name: Configure XOS
-  hosts: xos
+  hosts: localhost
   roles:
     - cord-improve

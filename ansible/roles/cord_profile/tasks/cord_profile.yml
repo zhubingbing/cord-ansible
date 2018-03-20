@@ -72,8 +72,6 @@
     dest: "{{ config_cord_profile_dir }}/{{ item }}"
   with_items:
     - fixtures.yaml
-    - enable-onboarding.yaml
-    - disable-onboarding.yaml
 
 - name: Create templated XOS configuration files
   template:
@@ -85,15 +83,12 @@
     - xos_config_synchronizer.yaml
     - initial_data.yaml
     - deployment.yaml
-    - xos.yaml
     - gateway-config.yml
     - style.config.js
     - app.config.js
     - Dockerfile.xos
-    - xos-gui-extensions.yml
     - docker-compose.yml
     - xos-tosca.config.yaml
-    - openstack.yaml
 
 - name: Create profile specific templated TOSCA config files
   template:
@@ -119,6 +114,7 @@
     dest: "{{ config_cord_profile_dir }}/{{ item }}"
   with_items:
     - admin-openrc.sh
+    - openstack.yaml
     - clouds.yaml
 
 - name: Delete xos user file
@@ -132,6 +128,22 @@
     dest: "{{ credentials_dir }}/{{ xos_admin_user }}"
     mode: "0600"
   
-  
- 
+- name: Set cord_profile_src_dir
+  set_fact:
+    cord_profile_src_dir: "../../profiles/{{ cord_use_case }}"
 
+- debug:
+    msg: "[WARNING] xos_new_tosca_config_templates is deprecated"
+  when: xos_new_tosca_config_templates
+
+- name: Create profile specific templated TOSCA config files
+  template:
+    src: "{{ cord_profile_src_dir }}/templates/{{ item }}.j2"
+    dest: "{{ config_cord_profile_dir }}/{{ item }}"
+  with_items: "{{ xos_tosca_config_templates + xos_new_tosca_config_templates }}"
+
+- name: Create profile specific templated non-TOSCA files
+  template:
+    src: "{{ cord_profile_src_dir }}/templates/{{ item }}.j2"
+    dest: "{{ config_cord_profile_dir }}/{{ item }}"
+  with_items: "{{ xos_other_templates }}"

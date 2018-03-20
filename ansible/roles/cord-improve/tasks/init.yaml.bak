@@ -1,0 +1,46 @@
+---
+- name: Copy (sync) the cord directory to head node
+  become: yes
+  synchronize:
+    src: "/opt/cord_profile/{{ item }}"
+    dest: "/opt/cord_profile/{{ item }}"
+  with_items:
+    - "openstack-compute.yaml"
+    - "openstack-compute-vtn.yaml"
+
+- name: Copying over config.json files for services
+  template:
+    src: "{{ item }}.j2"
+    dest: "/opt/cord_profile/{{ item }}"
+  with_items:
+#    - "openstack-compute.yaml"
+    - "vtn-network-cfg.json"
+    - "vtn-service.yaml"
+#    - "vtn-compute.yaml"
+    - "openstack-network.yaml"
+    - "fixtures.yaml"
+    - "deployment.yaml"
+#    - "openstack.yaml"
+    - "slice-test.yaml"
+#    - "node_key"
+
+- name: Bootstrap XOS database - create site, deployment, admin user
+  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
+  with_items:
+    - "fixtures.yaml"
+    - "deployment.yaml"
+    - "slice-test.yaml"
+
+- name: Configure XOS with OpenStack config
+  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
+  with_items:
+    - "openstack.yaml"
+    - "openstack-compute.yaml"
+
+
+- name: Configure vtn with xos config
+  command: "docker exec -t xos_ui python /opt/xos/tosca/run.py {{ xos_admin_user }} /opt/cord_profile/{{ item }}"
+  with_items:
+    - "vtn-service.yaml"
+    - "openstack-compute-vtn.yaml"
+#    - "openstack-network.yaml"
