@@ -1,7 +1,8 @@
 [control]
 # These hostname must be resolvable from your deployment host
-172.18.24.95   ansible_user_id=root 
+#172.18.24.95   ansible_user_id=root 
 #172.18.24.138   ansible_ssh_user=root 
+172.18.24.131 ansible_ssh_user=root
 
 [compute]
 172.18.24.142

@@ -1,6 +1,7 @@
 build_cord_dir: "/opt/cord"
 work_dir: "/opt/cord"
 cord_profile: "mcord"
+cord_scenario: "mcord-ng40"
 config_cord_profile_dir: "/opt/cord_profile"
 pull_docker_registry: "99cloud/"
 namespaces: ""
@@ -19,7 +20,9 @@ onos_ip: "10.90.0.10"
 local_management_ip: '172.27.0.1/24'
 management_network: '172.27.0.0/24'
 
+xos_tosca_url: "http://172.18.24.131:9102"
 tosca_url: "http://172.18.24.95:9102/run"
+cord_use_case: "mcord"
 
 compute_external_interfaces:
   - ens4
@@ -29,16 +32,16 @@ compute_external_interfaces:
 os_project_name: "admin"
 os_user_domain_name: "Default"
 os_user_name: "admin"
-os_password: "P91MoSOBi1ayhp7vhvnVeMiHGGmWhZxxgSuyfNwf"
+os_password: "99cloud"
 os_tenant_name: "admin"
-os_auth_url: "http://10.90.0.50:35357/v3"
+os_auth_url: "http://10.90.0.11:35357/v3"
 os_region_name: "RegionOne"
 os_identity_api_version: "3"
 
 extra_hosts:
-   - "openstack-kolla-1:10.90.0.18"
-   - "openstack-kolla-2:10.90.0.8"
+   - "compute01:10.90.0.11"
+   - "compute02:10.90.0.12"
 
 compute_node_name:
-  - "openstack-kolla-1"
-  - "openstack-kolla-2"
+  - "compute01"
+  - "compute02"

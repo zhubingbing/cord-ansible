@@ -33,7 +33,7 @@ topology_template:
   node_templates:
 
 # Images and flavors
-{% for image in xos_images %}
+{% for image in openstack_images %}
     {{ image.name }}:
       type: tosca.nodes.Image
       properties:
@@ -76,11 +76,11 @@ topology_template:
       properties:
           name: {{ site_name }}_{{ deployment_type }}_openstack
           backend_type: OpenStack
-          version: Kilo
-          auth_url: https://keystone.{{ site_suffix }}:5000/v2.0
-          admin_user: admin
-          admin_password: {{ keystone_admin_password }}
-          admin_tenant: admin
+          version: Pike
+          auth_url: {{ os_auth_url }}
+          admin_user: {{ os_user_name }}
+          admin_password: {{ os_password }}
+          admin_tenant: {{ os_tenant_name }}
           domain: Default
       artifacts:
           adminrc: /opt/cord_profile/admin-openrc.sh

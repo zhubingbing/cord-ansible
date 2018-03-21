@@ -1,3 +1,2 @@
 ---
-- include: init.yaml
-- include: mcord.yaml 
+- include: xos-config.yaml

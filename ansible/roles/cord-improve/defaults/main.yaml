@@ -1,31 +1,14 @@
 ---
 
 # used in deployment.yaml.j2
+head_cord_profile_dir: "/opt/cord_profile"
 
 xos_tosca_config_templates:
-  - management-net.yaml
 
 xos_tosca_config_templates:
-  - vtn-service.yaml
-  - fabric-service.yaml
-  - management-net.yaml
-  - shared-net.yaml
-  - wan-net.yaml
-  - vsg-net.yaml
-  - xos-gui-extensions.yml
 
 xos_new_tosca_config_templates:
-  - s11-net.yaml
-  - s1u-net.yaml
-  - nbi-net.yaml
-  - sbi-net.yaml
-  - spgw-net.yaml
-  - sgi-net.yaml
-  - flat-net.yaml
-  - mcord-ng40-services.yml
-  - service-graph-constraints.yaml
 
-xos_tosca_url: "http://xos-tosca/xos-tosca"
 credentials_dir: "/opt/key/credentials"
 xos_admin_user: "xosadmin@opencord.org"
 xos_admin_pass: "{{ lookup('password', credentials_dir ~ '/xosadmin@opencord.org chars=ascii_letters,digits') }}"
@@ -35,4 +18,3 @@ onos_ip: 10.10.10.7
 local_management_ip: 10.1.1.7/24
 xos_ip: 10.10.10.7
 
-tosca_url: "http://{{ xos_ip }}:9102/run"
