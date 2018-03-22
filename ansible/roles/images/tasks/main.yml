@@ -15,6 +15,15 @@
   become: yes
   shell: docker tag nginx:1.13 nginx:candidate
 
+
+- name: Delete tmp.chameleon
+  file:
+    path: "{{ item }}"
+    state: absent
+  with_items:
+    - "{{ work_dir}}/orchestration/xos/containers/xos/tmp.chameleon"
+    - "{{ work_dir}}/orchestration/xos/containers/chameleon/tmp.chameleon"
+
 - name: sync chameleon to xos
   become: yes
   shell: "cp -r {{ work_dir}}/component/chameleon {{ work_dir}}/orchestration/xos/containers/xos/tmp.chameleon"
