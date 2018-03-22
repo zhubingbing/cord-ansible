@@ -26,11 +26,11 @@
 
 - name: sync chameleon to xos
   become: yes
-  shell: "cp -r {{ work_dir}}/component/chameleon {{ work_dir}}/orchestration/xos/containers/xos/tmp.chameleon"
+  shell: "cp -af {{ work_dir}}/component/chameleon {{ work_dir}}/orchestration/xos/containers/xos/tmp.chameleon"
 
 - name: sync chameleon
   become: yes
-  shell: "cp -r {{ work_dir}}/component/chameleon {{ work_dir}}/orchestration/xos/containers/chameleon/tmp.chameleon"
+  shell: "cp -af {{ work_dir}}/component/chameleon {{ work_dir}}/orchestration/xos/containers/chameleon/tmp.chameleon"
 
 - name: Build an image and push it to a private repo
   docker_image:
