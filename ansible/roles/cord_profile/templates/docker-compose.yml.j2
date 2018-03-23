@@ -204,12 +204,12 @@ services:
     ports:
       - "3000:3000"
     links:
-      - xos_ui:xos
+      - xos_core:xos
 {% if use_redis %}
       - xos_redis:redis
 {% endif %}
     depends_on:
-      - xos_ui
+      - xos_core
 {% if use_redis %}
       - xos_redis
 {% endif %}
@@ -224,48 +224,6 @@ services:
       - registrator
     environment:
       SERVICE_3000_NAME: "xos-ws"
-    restart: unless-stopped
-
-  xos_ui:
-    image: {{ xos_ui_image }}
-    container_name: xos_ui
-    networks:
-{% for network in xos_docker_networks %}
-     - {{ network }}
-{% endfor %}
-    command: python /opt/xos/manage.py runserver 0.0.0.0:9000
-{% if extra_hosts %}
-    extra_hosts:
-{% for extra_host in extra_hosts %}
-      - {{ extra_host }}
-{% endfor %}
-{% endif %}
-    ports:
-      - "9000:9000"
-    links:
-      - xos_db:xos-db
-      - consul:consul
-{% if use_redis %}
-      - xos_redis:redis
-{% endif %}
-    depends_on:
-      - xos_db
-{% if use_redis %}
-      - xos_redis
-{% endif %}
-    volumes:
-      - {{ config_dir }}/xos_config.yaml:/opt/xos/xos_config.yaml:ro
-      - {{ config_dir }}:/opt/cord_profile:ro
-      - {{ config_dir }}/im_cert_chain.pem:/usr/local/share/ca-certificates/local_certs.crt:ro
-    logging:
-      driver: "json-file"
-      options:
-        max-size: "1000k"
-        max-file: "5"
-    depends_on:
-      - registrator
-    environment:
-      SERVICE_9000_NAME: "xos-ui-deprecated"
     restart: unless-stopped
 
   xos_core:

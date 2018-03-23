@@ -1,3 +1,10 @@
+- name: Copying over config.json files for services
+  template:
+    src: "{{ item }}.j2"
+    dest: "/opt/cord_profile/{{ item }}"
+  with_items:
+    - "vtn-service.yaml" 
+
 - name: Bootstrap XOS database - create site, deployment, admin user
   uri:
     url: "{{ xos_tosca_url }}/run"
@@ -30,3 +37,20 @@
   delay: 5
   with_items:
     - openstack.yaml
+
+- name: Configure XOS with profile specific TOSCA (new Engine)
+  uri:
+    url: "{{ xos_tosca_url }}/run"
+    method: POST
+    headers:
+      xos-username: "{{ xos_admin_user }}"
+      xos-password: "{{ xos_admin_pass }}"
+    body: "{{ lookup('file', head_cord_profile_dir + '/' + item ) }}"
+    status_code: 200
+  register: result
+  until: result | success
+  retries: 50
+  delay: 5
+  with_items: 
+    - fabric-service.yaml
+
